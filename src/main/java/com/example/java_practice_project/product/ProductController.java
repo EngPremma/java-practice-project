@@ -1,8 +1,11 @@
 package com.example.java_practice_project.product;
 
+import com.example.java_practice_project.product.model.ProductDTO;
+import com.example.java_practice_project.product.services.GetProductService;
 import com.example.java_practice_project.product.services.GetProductsService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,12 +14,21 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProductController {
     private final GetProductsService getProductsService;
 
-    public ProductController(GetProductsService getProductsService) {
+    private final GetProductService getProductService;
+
+    public ProductController(GetProductsService getProductsService, GetProductService getProductService) {
         this.getProductsService = getProductsService;
+        this.getProductService = getProductService;
     }
 
     @GetMapping("/")
     public ResponseEntity<String> getProducts() {
         return getProductsService.execute(null);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductDTO> getProductById(@PathVariable Integer id){
+        System.out.println(id);
+        return getProductService.execute(id);
     }
 }
