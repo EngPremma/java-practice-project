@@ -20,12 +20,12 @@ public class GetProductService implements Query<Integer, ProductDTO> {
 
     @Override
     public ResponseEntity<ProductDTO> execute(Integer id) {
-//        Optional<Product> productOptional = productRepository.findById(id);
+        Optional<Product> productOptional = productRepository.findById(id);
 
-//        if (productOptional.isPresent()) {
-//            return ResponseEntity.ok(new ProductDTO(productOptional.get()));
-//        }
+        if (productOptional.isPresent()) {
+            return ResponseEntity.ok(new ProductDTO(productOptional.get()));
+        }
 
-        throw new RuntimeException("Error");
+        throw new RuntimeException("Product not found");
     }
 }
