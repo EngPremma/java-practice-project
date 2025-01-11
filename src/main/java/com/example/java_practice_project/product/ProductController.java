@@ -28,7 +28,6 @@ public class ProductController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ProductDTO> getProductById(@PathVariable Integer id){
-        System.out.println(id);
         return getProductService.execute(id);
     }
 }
