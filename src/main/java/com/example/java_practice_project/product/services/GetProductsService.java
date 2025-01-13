@@ -19,9 +19,7 @@ public class GetProductsService implements Query<Void, List<ProductDTO>> {
     }
 
     @Override
-    public ResponseEntity<List<ProductDTO>>
-
-    execute(Void input) {
+    public ResponseEntity<List<ProductDTO>> execute(Void input) {
         List<Product> products = productRepository.findAll();
 
         List<ProductDTO> productDTOS = products.stream().map(ProductDTO::new).toList();
