@@ -23,7 +23,7 @@ public class SearchProductService implements Query<SearchProductQuery, List<Prod
     @Override
     public ResponseEntity<List<ProductDTO>> execute(SearchProductQuery query) {
         int pageNumber = 0;
-        int limit = 1;
+        int limit = 5;
         String nameQuery = query.getName();
         String[] sortQuery = query.getSort().split(":");
 
