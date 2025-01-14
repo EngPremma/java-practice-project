@@ -1,13 +1,12 @@
 package com.example.java_practice_project.product;
 
 import com.example.java_practice_project.product.model.ProductDTO;
+import com.example.java_practice_project.product.model.SearchProductQuery;
 import com.example.java_practice_project.product.services.GetProductService;
 import com.example.java_practice_project.product.services.GetProductsService;
+import com.example.java_practice_project.product.services.SearchProductService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,9 +17,14 @@ public class ProductController {
 
     private final GetProductService getProductService;
 
-    public ProductController(GetProductsService getProductsService, GetProductService getProductService) {
+    private final SearchProductService searchProductService;
+
+    public ProductController(GetProductsService getProductsService,
+                             GetProductService getProductService,
+                             SearchProductService searchProductService) {
         this.getProductsService = getProductsService;
         this.getProductService = getProductService;
+        this.searchProductService = searchProductService;
     }
 
     @GetMapping("/")
@@ -31,5 +35,11 @@ public class ProductController {
     @GetMapping("/{id}")
     public ResponseEntity<ProductDTO> getProductById(@PathVariable Integer id) {
         return getProductService.execute(id);
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<ProductDTO>> searchProduct(@RequestParam(defaultValue = "") String name,
+                                                          @RequestParam String sort) {
+        return searchProductService.execute(new SearchProductQuery(name, sort));
     }
 }
