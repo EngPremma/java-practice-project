@@ -32,10 +32,10 @@ public class Product {
     @Column(name = "manufacturer")
     private String manufacturer;
 
-    @Column(name = "created")
+    @Column(name = "created", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private String created;
 
-    @Column(name = "updated")
+    @Column(name = "updated", columnDefinition = "ON UPDATE CURRENT_TIMESTAMP")
     private String updated;
 
     @Enumerated(EnumType.STRING)
