@@ -1,5 +1,6 @@
 package com.example.java_practice_project.product.model;
 
+import com.example.java_practice_project.category.model.Category;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
@@ -41,18 +42,11 @@ public class Product {
     @Column(name = "region")
     private Region region;
 
-    @Column(name = "category_id")
-    private String categoryId;
+    @ManyToOne
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category category;
 
     public Product() {
-    }
-
-    public String getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(String categoryId) {
-        this.categoryId = categoryId;
     }
 
     public Region getRegion() {
@@ -117,5 +111,13 @@ public class Product {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }

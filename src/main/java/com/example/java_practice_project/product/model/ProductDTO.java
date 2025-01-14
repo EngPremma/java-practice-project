@@ -1,5 +1,7 @@
 package com.example.java_practice_project.product.model;
 
+import com.example.java_practice_project.category.model.Category;
+
 //@Data
 public class ProductDTO {
     private Integer id;
@@ -8,7 +10,7 @@ public class ProductDTO {
     private Double price;
     private String manufacturer;
     private Region region;
-    private String categoryId;
+    private Category category;
 
     public ProductDTO(Product product) {
         this.id = product.getId();
@@ -17,7 +19,7 @@ public class ProductDTO {
         this.price = product.getPrice();
         this.manufacturer = product.getManufacturer();
         this.region = product.getRegion();
-        this.categoryId = product.getCategoryId();
+        this.category = product.getCategory();
     }
 
     //    Temporary fix
@@ -45,7 +47,7 @@ public class ProductDTO {
         return region;
     }
 
-    public String getCategoryId() {
-        return categoryId;
+    public Category getCategory() {
+        return category;
     }
 }
