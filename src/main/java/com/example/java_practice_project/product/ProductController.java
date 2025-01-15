@@ -3,10 +3,8 @@ package com.example.java_practice_project.product;
 import com.example.java_practice_project.product.model.Product;
 import com.example.java_practice_project.product.model.ProductDTO;
 import com.example.java_practice_project.product.model.SearchProductQuery;
-import com.example.java_practice_project.product.services.CreateProductService;
-import com.example.java_practice_project.product.services.GetProductService;
-import com.example.java_practice_project.product.services.GetProductsService;
-import com.example.java_practice_project.product.services.SearchProductService;
+import com.example.java_practice_project.product.model.UpdateProductCommand;
+import com.example.java_practice_project.product.services.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,14 +21,18 @@ public class ProductController {
 
     private final CreateProductService createProductService;
 
+    private final UpdateProductService updateProductService;
+
     public ProductController(GetProductsService getProductsService,
                              GetProductService getProductService,
                              SearchProductService searchProductService,
-                             CreateProductService createProductService) {
+                             CreateProductService createProductService,
+                             UpdateProductService updateProductService) {
         this.getProductsService = getProductsService;
         this.getProductService = getProductService;
         this.searchProductService = searchProductService;
         this.createProductService = createProductService;
+        this.updateProductService = updateProductService;
     }
 
     @GetMapping("/")
@@ -52,5 +54,10 @@ public class ProductController {
     @PostMapping("/")
     public ResponseEntity<ProductDTO> createProduct(@RequestBody Product product) {
         return createProductService.execute(product);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ProductDTO> updateProduct(@PathVariable Integer id, @RequestBody Product product) {
+        return updateProductService.execute(new UpdateProductCommand(id, product));
     }
 }
