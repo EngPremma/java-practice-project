@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 // Temporary fix
@@ -32,10 +34,12 @@ public class Product {
     @Column(name = "manufacturer")
     private String manufacturer;
 
-    @Column(name = "created", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    @CreationTimestamp
+    @Column(name = "created")
     private String created;
 
-    @Column(name = "updated", columnDefinition = "ON UPDATE CURRENT_TIMESTAMP")
+    @UpdateTimestamp
+    @Column(name = "updated")
     private String updated;
 
     @Enumerated(EnumType.STRING)
