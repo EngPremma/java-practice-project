@@ -1,6 +1,7 @@
 package com.example.java_practice_project.product.services;
 
 import com.example.java_practice_project.Query;
+import com.example.java_practice_project.exceptions.ProductNotFoundException;
 import com.example.java_practice_project.product.ProductRepository;
 import com.example.java_practice_project.product.model.Product;
 import com.example.java_practice_project.product.model.ProductDTO;
@@ -26,6 +27,6 @@ public class GetProductService implements Query<Integer, ProductDTO> {
             return ResponseEntity.ok(new ProductDTO(productOptional.get()));
         }
 
-        throw new RuntimeException("Product not found");
+        throw new ProductNotFoundException();
     }
 }
