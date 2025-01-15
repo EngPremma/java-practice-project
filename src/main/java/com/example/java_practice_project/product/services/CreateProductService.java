@@ -2,6 +2,7 @@ package com.example.java_practice_project.product.services;
 
 import com.example.java_practice_project.Command;
 import com.example.java_practice_project.category.CategoryRepository;
+import com.example.java_practice_project.exceptions.CategoryNotFoundException;
 import com.example.java_practice_project.product.ProductRepository;
 import com.example.java_practice_project.product.model.Product;
 import com.example.java_practice_project.product.model.ProductDTO;
@@ -23,7 +24,7 @@ public class CreateProductService implements Command<Product, ProductDTO> {
     @Override
     public ResponseEntity<ProductDTO> execute(Product product) {
         categoryRepository.findById(product.getCategory().getId())
-                .orElseThrow(() -> new RuntimeException("Category not found"));
+                .orElseThrow(CategoryNotFoundException::new);
 
         Product saveproduct = productRepository.save(product);
 

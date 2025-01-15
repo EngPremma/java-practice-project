@@ -1,6 +1,7 @@
 package com.example.java_practice_project.product.services;
 
 import com.example.java_practice_project.Command;
+import com.example.java_practice_project.exceptions.ProductNotFoundException;
 import com.example.java_practice_project.product.ProductRepository;
 import com.example.java_practice_project.product.model.Product;
 import org.springframework.http.HttpStatus;
@@ -27,6 +28,6 @@ public class DeleteProductService implements Command<Integer, Void> {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
 
-        throw new RuntimeException("Product not found");
+        throw new ProductNotFoundException();
     }
 }
